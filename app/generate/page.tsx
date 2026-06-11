@@ -10,6 +10,7 @@ import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { PreviewGallery } from "@/components/PreviewGallery";
 import { PaymentModal } from "@/components/PaymentModal";
+import { WhatsAppFab, WhatsAppLink } from "@/components/WhatsApp";
 import {
   CompanyData, emptyCompany, ENTITY_TYPES, INDUSTRIES, STATES,
 } from "@/lib/types";
@@ -132,8 +133,13 @@ export default function GeneratePage() {
 
       <div className="mx-auto max-w-3xl px-4 py-7 sm:px-5 sm:py-8">
         {payError && (
-          <div className="mb-5 flex items-start gap-2 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
-            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" /> {payError}
+          <div className="mb-5 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+            <div className="flex items-start gap-2">
+              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" /> {payError}
+            </div>
+            <div className="mt-2 pl-6">
+              <WhatsAppLink label="Reach us on WhatsApp" />
+            </div>
           </div>
         )}
 
@@ -209,6 +215,8 @@ export default function GeneratePage() {
           </div>
         </div>
       )}
+
+      <WhatsAppFab />
     </main>
   );
 }

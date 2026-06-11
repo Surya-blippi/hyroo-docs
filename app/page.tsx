@@ -7,6 +7,7 @@ import { Logo } from "@/components/Logo";
 import { Reveal } from "@/components/Reveal";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { TweetEmbed } from "@/components/TweetEmbed";
+import { WhatsAppFab, WhatsAppLink, WHATSAPP_DISPLAY } from "@/components/WhatsApp";
 import { HeroSection } from "@/components/ui/hero-with-product-mockup";
 import { DOCUMENTS, documentsByCategory, CATEGORY_ORDER } from "@/lib/documents";
 import { DocCategory } from "@/lib/types";
@@ -249,10 +250,16 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="relative overflow-hidden border-t border-border bg-background">
-        <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-12 text-sm text-muted-foreground sm:px-6 md:flex-row">
-          <Logo />
-          <p className="text-center">© {new Date().getFullYear()} Hyroo. HR &amp; legal paperwork for Indian startups.</p>
-          <p className="text-center text-xs">Not a law firm. Templates are not legal advice.</p>
+        <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-12 text-sm text-muted-foreground sm:px-6">
+          <div className="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
+            <Logo />
+            <p className="text-center">© {new Date().getFullYear()} Hyroo. HR &amp; legal paperwork for Indian startups.</p>
+            <p className="text-center text-xs">Not a law firm. Templates are not legal advice.</p>
+          </div>
+          <div className="flex flex-col items-center gap-1 border-t border-border pt-5 text-center md:flex-row md:gap-2">
+            <span>Questions or need help?</span>
+            <WhatsAppLink label={`WhatsApp us at ${WHATSAPP_DISPLAY}`} />
+          </div>
         </div>
         <div
           aria-hidden
@@ -262,6 +269,8 @@ export default function Home() {
           hyroo
         </div>
       </footer>
+
+      <WhatsAppFab />
     </main>
   );
 }

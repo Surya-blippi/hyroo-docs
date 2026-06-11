@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Lock, Loader2, X, ShieldCheck, CreditCard } from "lucide-react";
 import { PRICE_INR, dodoEnabled, startDodoCheckout } from "@/lib/payment";
 import { CompanyData } from "@/lib/types";
+import { WhatsAppLink } from "@/components/WhatsApp";
 
 export function PaymentModal({
   open,
@@ -98,6 +99,10 @@ export function PaymentModal({
               Secure checkout by Dodo Payments. You&apos;ll be redirected to complete payment.
             </p>
           )}
+
+          <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs text-ink-muted">
+            Payment trouble? <WhatsAppLink label="WhatsApp us" className="text-xs" />
+          </p>
         </div>
       </div>
     </div>
