@@ -34,20 +34,19 @@ export function WhatsAppLink({
   );
 }
 
-// Floating "chat with us" button, fixed bottom-right.
+// Subtle, non-intrusive help button — fixed bottom-right, icon-only.
+// Sits below modals (z-40) and only turns WhatsApp-green on hover.
 export function WhatsAppFab() {
   return (
     <a
       href={WHATSAPP_HREF}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Chat with support on WhatsApp at ${WHATSAPP_DISPLAY}`}
-      className="group fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-3.5 py-3 text-sm font-semibold text-white shadow-lg ring-1 ring-black/5 transition hover:bg-[#1ebe5d] hover:shadow-xl active:translate-y-px sm:bottom-6 sm:right-6"
+      aria-label={`Questions or help? Chat on WhatsApp (${WHATSAPP_DISPLAY})`}
+      title="Questions or help? WhatsApp us"
+      className="fixed bottom-4 right-4 z-40 inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/80 text-[#25D366] opacity-70 shadow-sm backdrop-blur transition hover:bg-[#25D366] hover:text-white hover:opacity-100 hover:shadow-md"
     >
-      <WhatsAppIcon className="h-6 w-6" />
-      <span className="hidden max-w-0 overflow-hidden whitespace-nowrap transition-all duration-300 group-hover:max-w-[8rem] sm:inline">
-        Need help?
-      </span>
+      <WhatsAppIcon className="h-5 w-5" />
     </a>
   );
 }
