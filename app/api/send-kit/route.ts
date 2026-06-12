@@ -92,6 +92,36 @@ function emailHtml(c: CompanyData): string {
 </html>`;
 }
 
+// Diagnostic: reports effective (non-secret) email config; ?probe=send
+// attempts a real send to Resend's test inbox and returns the exact error.
+export async function GET(req: NextRequest) {
+  const from = process.env.RESEND_FROM || "Hyroo <kit@hyroo.in>";
+  const replyTo = process.env.RESEND_REPLY_TO || "hello@hyroo.in";
+  const info: Record<string, unknown> = {
+    resendKeyPresent: Boolean(process.env.RESEND_API_KEY),
+    from,
+    replyTo,
+    dodoKeyPresent: Boolean(process.env.DODO_PAYMENTS_API_KEY),
+    dodoMode: process.env.DODO_MODE || "test",
+    productIdPresent: Boolean(process.env.DODO_PRODUCT_ID),
+  };
+
+  if (new URL(req.url).searchParams.get("probe") === "send" && process.env.RESEND_API_KEY) {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const { data, error } = await resend.emails.send({
+      from,
+      replyTo,
+      to: "delivered@resend.dev", // Resend's always-accept test inbox
+      subject: "[probe] Hyroo production email config check",
+      html: "<p>Probe send from production.</p>",
+    });
+    info.probeSent = Boolean(data?.id);
+    info.probeError = error ? error.message || JSON.stringify(error) : null;
+  }
+
+  return NextResponse.json(info);
+}
+
 export async function POST(req: NextRequest) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
