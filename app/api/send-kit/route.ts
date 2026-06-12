@@ -120,12 +120,15 @@ export async function POST(req: NextRequest) {
   }
 
   const resend = new Resend(apiKey);
-  // hyroo.in is verified in Resend, so default to the domain sender.
+  // hyroo.in is verified in Resend, so any @hyroo.in sender works (no mailbox
+  // needed). Replies go to the real, monitored GoDaddy inbox.
   const from = process.env.RESEND_FROM || "Hyroo <kit@hyroo.in>";
+  const replyTo = process.env.RESEND_REPLY_TO || "hello@hyroo.in";
   const companyName = company.brandName || company.legalName || "your company";
 
   const { error } = await resend.emails.send({
     from,
+    replyTo,
     to: email,
     subject: `Your Hyroo document kit for ${companyName} (${DOCUMENTS.length} documents)`,
     html: emailHtml(company),
