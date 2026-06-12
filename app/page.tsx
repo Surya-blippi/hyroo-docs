@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {
-  ArrowRight, FileText, ShieldCheck, Clock, Download,
+  ArrowRight, ShieldCheck, Clock,
   Building2, ScrollText, Users, Scale, Lock, Check,
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
@@ -8,6 +8,7 @@ import { Reveal } from "@/components/Reveal";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { TweetEmbed } from "@/components/TweetEmbed";
 import { WhatsAppFab, WhatsAppLink, WHATSAPP_DISPLAY } from "@/components/WhatsApp";
+import { ProductWalkthrough } from "@/components/ProductWalkthrough";
 import { HeroSection } from "@/components/ui/hero-with-product-mockup";
 import { DOCUMENTS, documentsByCategory, CATEGORY_ORDER } from "@/lib/documents";
 import { DocCategory } from "@/lib/types";
@@ -30,12 +31,6 @@ const VALUE_PROPS = [
   { icon: Building2, title: "Lawyers quote ₹15,000+", body: "A founder shouldn't pay a fortune for a first NDA or appointment letter. Hyroo gives you the same essentials for ₹499." },
   { icon: ShieldCheck, title: "Compliance you'd miss", body: "A written appointment letter is mandatory under the Shops & Establishments Act. A POSH policy is required for every workplace. We bake these in." },
   { icon: Clock, title: "Hours of templates, gone", body: "Stop stitching together random Google Doc templates. Answer once, and every document is filled with your company's details." },
-];
-
-const STEPS = [
-  { n: "01", icon: Building2, title: "Tell us about your company", body: "Legal name, entity type, industry, address and signatory. We use it to fill every document." },
-  { n: "02", icon: FileText, title: "Preview your documents", body: "Flip through your kit, filled with your details. The full editable files unlock at checkout." },
-  { n: "03", icon: Download, title: "Pay ₹499, download all", body: "Every document arrives as an editable Word file: download the zip instantly, and a copy lands in your inbox." },
 ];
 
 const TWEET_URL = "https://x.com/chiragiscooking/status/2062064028990775481";
@@ -149,36 +144,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How it works */}
-      <section id="how" className="scroll-mt-24 bg-background py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <Reveal>
-            <p className="eyebrow">Three steps</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-              From blank page to <span className="text-muted-foreground">signed kit.</span>
-            </h2>
-          </Reveal>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {STEPS.map((s, i) => (
-              <Reveal key={s.n} delay={i * 90}>
-                <div className="card spotlight group relative h-full overflow-hidden p-8">
-                  <span className="absolute -right-3 -top-5 text-9xl font-extrabold leading-none text-foreground/[0.04]">{s.n}</span>
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between">
-                      <span className="grid h-11 w-11 place-items-center rounded-xl border border-border bg-muted text-primary transition-colors group-hover:text-foreground">
-                        <s.icon className="h-5 w-5" />
-                      </span>
-                      <span className="text-3xl font-bold text-muted-foreground/40 transition-colors group-hover:text-foreground">{s.n}</span>
-                    </div>
-                    <h3 className="mt-6 text-xl font-bold tracking-tight text-foreground">{s.title}</h3>
-                    <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* How it works: visual walkthrough from details to delivered documents */}
+      <ProductWalkthrough />
 
       {/* Why Hyroo - reasons + social proof */}
       <section className="bg-grid">
