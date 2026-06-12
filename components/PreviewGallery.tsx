@@ -47,7 +47,7 @@ function TeaseCard({
         <Lock className="ml-auto h-3.5 w-3.5 shrink-0 text-zinc-400" />
       </div>
 
-      {/* Real, readable live preview — watermarked & copy-protected */}
+      {/* Real, readable live preview - watermarked & copy-protected */}
       <div className="max-h-[360px] overflow-y-auto bg-white px-5 py-5">
         <DocumentPreview blocks={blocks} watermark={watermark} logoUrl={company.logoDataUrl} />
       </div>

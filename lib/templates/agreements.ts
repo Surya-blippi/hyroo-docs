@@ -98,7 +98,7 @@ export const companyNda: DocumentDef = {
     { type: "h2", text: "1. Purpose" },
     {
       type: "p",
-      text: "The Parties wish to explore a potential business relationship — such as a vendor engagement, partnership or investment (the \"Purpose\") — and, in connection with the Purpose, may disclose Confidential Information to each other.",
+      text: "The Parties wish to explore a potential business relationship, such as a vendor engagement, partnership or investment (the \"Purpose\"), and, in connection with the Purpose, may disclose Confidential Information to each other.",
     },
     { type: "h2", text: "2. Confidential Information" },
     {
@@ -225,7 +225,7 @@ export const vendorAgreement: DocumentDef = {
   name: "Vendor / Service Provider Agreement",
   category: "Company Legal Contracts",
   description:
-    "Engages agencies, software tools, production houses and other vendors — scope, fees, service levels, confidentiality and liability.",
+    "Engages agencies, software tools, production houses and other vendors: scope, fees, service levels, confidentiality and liability.",
   build: (c): Block[] => [
     { type: "h1", text: "Vendor / Service Provider Agreement" },
     { type: "p", text: `Date: ${todayLong()}` },

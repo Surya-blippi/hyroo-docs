@@ -1,4 +1,4 @@
-// Payment orchestration — Dodo Payments (hosted Checkout Session).
+// Payment orchestration - Dodo Payments (hosted Checkout Session).
 //
 // Flow:
 //   1. Client asks /api/checkout to create a Dodo Checkout Session.
@@ -23,7 +23,7 @@ export function savePendingCompany(company: unknown) {
   try {
     localStorage.setItem(PENDING_KEY, JSON.stringify(company));
   } catch {
-    /* quota / unavailable — non-fatal */
+    /* quota / unavailable - non-fatal */
   }
 }
 
@@ -66,7 +66,7 @@ export async function startDodoCheckout(opts: {
       body: JSON.stringify({ name: opts.name, email: opts.email }),
     });
   } catch {
-    return { configured: true, ok: false, error: "Network error — please try again." };
+    return { configured: true, ok: false, error: "Network error. Please try again." };
   }
 
   if (res.status === 501) return { configured: false, ok: false };
@@ -91,6 +91,23 @@ export async function verifyDodoPayment(paymentId: string): Promise<boolean> {
     if (!res.ok) return false;
     const j = await res.json();
     return Boolean(j.paid);
+  } catch {
+    return false;
+  }
+}
+
+// Ask the server to generate the kit and email it to the buyer.
+// Returns true if the email was sent; false is non-fatal (downloads still work).
+export async function sendKitEmail(company: unknown, paymentId?: string): Promise<boolean> {
+  try {
+    const res = await fetch("/api/send-kit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ company, payment_id: paymentId }),
+    });
+    if (!res.ok) return false;
+    const j = await res.json();
+    return Boolean(j.sent);
   } catch {
     return false;
   }

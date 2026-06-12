@@ -1,10 +1,7 @@
 import React from "react";
+import { WHATSAPP_DISPLAY, WHATSAPP_HREF } from "@/lib/support";
 
-export const WHATSAPP_NUMBER = "918587880823";
-export const WHATSAPP_DISPLAY = "+91 85878 80823";
-export const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Hi Hyroo, I need help with my document kit."
-)}`;
+export { WHATSAPP_NUMBER, WHATSAPP_DISPLAY, WHATSAPP_HREF } from "@/lib/support";
 
 export function WhatsAppIcon({ className = "h-4 w-4" }: { className?: string }) {
   return (
@@ -34,7 +31,7 @@ export function WhatsAppLink({
   );
 }
 
-// Subtle, non-intrusive help button — fixed bottom-right, icon-only.
+// Subtle, non-intrusive help button - fixed bottom-right, icon-only.
 // Sits below modals (z-40) and only turns WhatsApp-green on hover.
 export function WhatsAppFab() {
   return (

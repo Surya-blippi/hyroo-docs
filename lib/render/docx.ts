@@ -15,7 +15,7 @@ function dataUrlToBytes(dataUrl: string): Uint8Array {
 }
 
 // --- Palette (print-safe; documents are strictly black + greys) -----------
-const INK = "000000"; // body & headings — pure black
+const INK = "000000"; // body & headings - pure black
 const GREY = "6B7280"; // secondary (header/footer/notes)
 const RULE = "D9D9D9"; // light hairline divider
 const TABLE_BORDER = "BFBFBF"; // table gridlines

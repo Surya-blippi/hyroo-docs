@@ -85,10 +85,17 @@ DODO_PAYMENTS_API_KEY=...
 DODO_MODE=live            # or test
 DODO_PRODUCT_ID=pdt_xxx
 NEXT_PUBLIC_DODO_ENABLED=1
+RESEND_API_KEY=re_xxx     # emails the kit to the buyer after payment
+RESEND_FROM=Hyroo <kit@hyroo.in>   # requires the domain to be verified in Resend
 ```
 
 The checkout `return_url` is derived from the request origin, so it points at your Vercel
-domain automatically. `.env.local` is gitignored and never deploys — set the vars in Vercel.
+domain automatically. `.env.local` is gitignored and never deploys; set the vars in Vercel.
+
+**Email delivery:** after a verified payment, `/api/send-kit` regenerates all documents
+server-side and emails them as .docx attachments via Resend. The endpoint re-verifies the
+Dodo payment before sending. Until your domain is verified in Resend, the default
+`onboarding@resend.dev` sender can only deliver to your own Resend account email.
 
 ### Smoke test the document engine
 

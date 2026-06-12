@@ -14,7 +14,7 @@ export const offerLetter: DocumentDef = {
   name: "Offer Letter",
   category: "HR & Employee Contracts",
   description:
-    "The first formal offer after selection — role, CTC, joining date, probation period and reporting structure.",
+    "The first formal offer after selection: role, CTC, joining date, probation period and reporting structure.",
   needsCandidate: true,
   build: (c): Block[] => [
     { type: "h1", text: "Offer of Employment" },
@@ -63,7 +63,7 @@ export const employmentAgreement: DocumentDef = {
   name: "Employment Agreement",
   category: "HR & Employee Contracts",
   description:
-    "The binding employment contract — duties, working hours, compensation, leave entitlement, confidentiality, IP and termination. Mandatory in writing under the Shops & Establishments Act.",
+    "The binding employment contract: duties, working hours, compensation, leave entitlement, confidentiality, IP and termination. Mandatory in writing under the Shops & Establishments Act.",
   needsCandidate: true,
   build: (c): Block[] => {
     const blocks: Block[] = [
@@ -201,7 +201,7 @@ export const separationAgreement: DocumentDef = {
   name: "Separation Agreement / Full & Final Settlement",
   category: "HR & Employee Contracts",
   description:
-    "Documents an employee's exit — last working day, full and final dues, return of property, and surviving confidentiality obligations.",
+    "Documents an employee's exit: last working day, full and final dues, return of property, and surviving confidentiality obligations.",
   needsCandidate: true,
   build: (c): Block[] => [
     { type: "h1", text: "Separation Agreement & Full and Final Settlement" },

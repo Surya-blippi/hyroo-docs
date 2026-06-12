@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Dodo Payments — create a hosted Checkout Session for the one-time kit.
+// Dodo Payments - create a hosted Checkout Session for the one-time kit.
 // Docs: POST {base}/checkouts  → returns { checkout_url }
 function apiBase() {
   return process.env.DODO_MODE === "live"

@@ -71,7 +71,7 @@ body {
   background: rgba(99, 102, 241, 0.3);
 }
 
-/* Faint grid backdrop — flips with theme (uses foreground at low alpha) */
+/* Faint grid backdrop - flips with theme (uses foreground at low alpha) */
 .bg-grid {
   background-color: hsl(var(--background));
   background-image:
@@ -80,7 +80,7 @@ body {
   background-size: 32px 32px;
 }
 
-/* Glassy panel — intentionally dark in BOTH themes (a striking CTA island) */
+/* Glassy panel - intentionally dark in BOTH themes (a striking CTA island) */
 .bg-board {
   background-color: #0e0e16;
   background-image:

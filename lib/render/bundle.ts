@@ -29,7 +29,7 @@ export async function downloadBundle(defs: DocumentDef[], company: CompanyData) 
 
 function readme(defs: DocumentDef[], c: CompanyData): string {
   const lines = [
-    `${(c.brandName || c.legalName || "Your company")} — Document Kit by Hyroo`,
+    `${(c.brandName || c.legalName || "Your company")} - Document Kit by Hyroo`,
     `Generated on ${new Date().toLocaleString("en-IN")}`,
     "",
     "This kit contains the following editable Word (.docx) documents:",
@@ -45,7 +45,7 @@ function readme(defs: DocumentDef[], c: CompanyData): string {
     "DISCLAIMER",
     "  " + DISCLAIMER,
     "",
-    "Made with Hyroo — HR & legal paperwork for Indian startups.",
+    "Made with Hyroo, HR & legal paperwork for Indian startups.",
   ];
   return lines.join("\n");
 }

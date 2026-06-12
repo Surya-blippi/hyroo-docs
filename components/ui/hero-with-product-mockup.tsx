@@ -40,8 +40,8 @@ export function HeroSection({
       </span>
     </>
   ),
-  description = "Answer a few questions about your company. Hyroo generates a complete kit of editable, India-ready documents — offer letters, NDAs, the POSH policy and more. One flat price of ₹499.",
-  primaryButtonText = "Build my kit — ₹499",
+  description = "Answer a few questions about your company. Hyroo generates a complete kit of editable, India-ready documents: offer letters, NDAs, the POSH policy and more. One flat price of ₹499.",
+  primaryButtonText = "Build my kit · ₹499",
   primaryButtonIcon = <ArrowRight size={20} />,
   primaryHref = "/generate",
   secondaryButtonText = "See what's inside",
@@ -55,7 +55,7 @@ export function HeroSection({
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0 bg-radial-warm" />
 
-      {/* Left — copy */}
+      {/* Left - copy */}
       <div className="relative z-10 mx-auto max-w-2xl space-y-6 text-center lg:mx-0 lg:text-left">
         <Reveal delay={0}>
           {eyebrow ? (
@@ -100,7 +100,7 @@ export function HeroSection({
         </Reveal>
       </div>
 
-      {/* Right — product mockups */}
+      {/* Right - product mockups */}
       {showMockups && (
         <Reveal delay={200} className="relative z-10 mx-auto mt-8 w-full max-w-md lg:mt-0">
           {/* Application window (in-flow on mobile, tilted on desktop) */}
@@ -164,11 +164,11 @@ export function HeroSection({
             </div>
           </div>
 
-          {/* Stacked windows behind — large screens only */}
+          {/* Stacked windows behind - large screens only */}
           <div className="absolute -left-4 -top-4 -z-10 hidden h-full w-full rotate-6 rounded-2xl bg-gradient-to-br from-violet-500 to-violet-600 shadow-xl lg:block" />
           <div className="absolute -left-8 -top-8 -z-20 hidden h-full w-full rotate-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-700 shadow-xl lg:block" />
 
-          {/* Phone mockup — large screens only */}
+          {/* Phone mockup - large screens only */}
           <div className="absolute hidden h-80 w-44 -rotate-12 rounded-[2.5rem] bg-slate-900 p-2 shadow-2xl transition-transform duration-300 hover:-rotate-6 lg:-bottom-12 lg:-right-10 lg:block">
             <div className="h-full w-full overflow-hidden rounded-[2rem] border border-border bg-card">
               {/* Phone status bar */}

@@ -55,7 +55,7 @@ export function DocumentPreview({
           <BlockView key={i} block={b} />
         ))}
       </div>
-      {/* Watermark overlay — sits above the text, never intercepts clicks */}
+      {/* Watermark overlay - sits above the text, never intercepts clicks */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-10"

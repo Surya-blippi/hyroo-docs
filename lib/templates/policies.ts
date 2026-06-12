@@ -10,7 +10,7 @@ export const poshPolicy: DocumentDef = {
   name: "POSH Policy (Prevention of Sexual Harassment)",
   category: "Compliance & Governance",
   description:
-    "Mandatory under the POSH Act, 2013 — definitions, Internal Committee composition, complaint process and timelines. Adapts to your team size.",
+    "Mandatory under the POSH Act, 2013: definitions, Internal Committee composition, complaint process and timelines. Adapts to your team size.",
   build: (c): Block[] => {
     const large = isLargeTeam(c);
     const committee: Block[] = large
@@ -23,7 +23,7 @@ export const poshPolicy: DocumentDef = {
           {
             type: "ul",
             items: [
-              "A Presiding Officer — a woman employed at a senior level;",
+              "A Presiding Officer, being a woman employed at a senior level;",
               "Not fewer than two members from amongst employees, preferably committed to the cause of women or with experience in social work or legal knowledge;",
               "One external member from an NGO or association committed to the cause of women, or a person familiar with issues relating to sexual harassment.",
             ],
@@ -93,7 +93,7 @@ export const poshPolicy: DocumentDef = {
       { type: "h2", text: "8. Protection Against Retaliation & False Complaints" },
       {
         type: "p",
-        text: "No person shall be victimised for making a complaint or assisting in an inquiry in good faith. Malicious or knowingly false complaints may, however, attract action — though inability to substantiate a complaint shall not by itself attract action.",
+        text: "No person shall be victimised for making a complaint or assisting in an inquiry in good faith. Malicious or knowingly false complaints may, however, attract action; inability to substantiate a complaint shall not by itself attract action.",
       },
       { type: "h2", text: "9. Awareness & Annual Report" },
       {
@@ -110,7 +110,7 @@ export const leavePolicy: DocumentDef = {
   name: "Leave Policy",
   category: "Employee Policies",
   description:
-    "A clear leave framework — casual, sick, earned leave, maternity/paternity benefits and the public-holiday calendar.",
+    "A clear leave framework covering casual, sick and earned leave, maternity and paternity benefits, and the public-holiday calendar.",
   build: (c): Block[] => [
     { type: "h1", text: "Leave Policy" },
     { type: "p", text: `${displayName(c)} | Effective Date: ${todayLong()}` },
@@ -164,7 +164,7 @@ export const codeOfConduct: DocumentDef = {
   name: "Code of Conduct Policy",
   category: "Employee Policies",
   description:
-    "Sets behavioural standards — professional conduct, dress code, social-media use and conflicts of interest.",
+    "Sets behavioural standards for professional conduct, dress code, social-media use and conflicts of interest.",
   build: (c): Block[] => [
     { type: "h1", text: "Code of Conduct Policy" },
     { type: "p", text: `${displayName(c)} | Effective Date: ${todayLong()}` },

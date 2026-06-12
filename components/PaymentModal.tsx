@@ -41,7 +41,7 @@ export function PaymentModal({
         return;
       }
       if (res.ok) {
-        // Redirecting to Dodo's hosted checkout — keep the spinner up.
+        // Redirecting to Dodo's hosted checkout - keep the spinner up.
         return;
       }
       setError(res.error || "Payment could not be started. Please try again.");
@@ -92,7 +92,7 @@ export function PaymentModal({
 
           {isDemo ? (
             <p className="mt-3 text-center text-xs text-ink-muted">
-              Demo mode — no real payment is charged. Configure Dodo Payments to go live.
+              Demo mode: no real payment is charged. Configure Dodo Payments to go live.
             </p>
           ) : (
             <p className="mt-3 text-center text-xs text-ink-muted">

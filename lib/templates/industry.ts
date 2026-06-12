@@ -1,6 +1,6 @@
 import { CompanyData, Industry } from "../types";
 
-// Industry-aware clause snippets. Kept light but real — these inject the most
+// Industry-aware clause snippets. Kept light but real - these inject the most
 // relevant compliance/confidentiality language for the selected industry.
 
 export function industryConfidentialityNote(c: CompanyData): string | null {

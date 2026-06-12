@@ -20,10 +20,10 @@ const CATEGORY_ICON: Record<DocCategory, typeof Users> = {
 };
 
 const CATEGORY_BLURB: Record<DocCategory, string> = {
-  "HR & Employee Contracts": "Offer to exit — every contract to hire and manage your team, compliantly.",
+  "HR & Employee Contracts": "From offer to exit: every contract you need to hire and manage your team, compliantly.",
   "Employee Policies": "The day-to-day policies your team operates by.",
   "Company Legal Contracts": "Protect your IP and deals with vendors, partners and contractors.",
-  "Compliance & Governance": "The statutory pieces you can't skip — starting with POSH.",
+  "Compliance & Governance": "The statutory pieces you can't skip, starting with POSH.",
 };
 
 const VALUE_PROPS = [
@@ -34,17 +34,17 @@ const VALUE_PROPS = [
 
 const STEPS = [
   { n: "01", icon: Building2, title: "Tell us about your company", body: "Legal name, entity type, industry, address and signatory. We use it to fill every document." },
-  { n: "02", icon: FileText, title: "Preview your documents", body: "Flip through your kit, filled with your details — the full editable files unlock at checkout." },
-  { n: "03", icon: Download, title: "Pay ₹499, download all", body: "Get every document as an editable Word file in one zip — ready to tweak, sign and use." },
+  { n: "02", icon: FileText, title: "Preview your documents", body: "Flip through your kit, filled with your details. The full editable files unlock at checkout." },
+  { n: "03", icon: Download, title: "Pay ₹499, download all", body: "Every document arrives as an editable Word file: download the zip instantly, and a copy lands in your inbox." },
 ];
 
 const TWEET_URL = "https://x.com/chiragiscooking/status/2062064028990775481";
 
 const REASONS = [
-  { title: "Customised to your industry", body: "Fintech, SaaS, healthcare and more — clauses tailored to how your company actually operates." },
+  { title: "Customised to your industry", body: "Fintech, SaaS, healthcare and more, with clauses tailored to how your company actually operates." },
   { title: "Vetted by professional lawyers", body: "Every template is reviewed by qualified advocates, not generated blindly." },
   { title: "A one-time investment", body: "Pay ₹499 once. No subscriptions, no per-document charges, ever." },
-  { title: "No risk of missing a compliance", body: "POSH, the mandatory appointment letter, DPDP — the pieces you can't skip are built in." },
+  { title: "No risk of missing a compliance", body: "POSH, the mandatory appointment letter, DPDP: the pieces you can't skip are built in." },
 ];
 
 const PRICE_FEATURES = [
@@ -77,7 +77,7 @@ export default function Home() {
         </nav>
       </div>
 
-      {/* Hero — product-mockup style */}
+      {/* Hero - product-mockup style */}
       <HeroSection />
       <div className="pointer-events-none -mt-32 h-32 w-full bg-gradient-to-t from-background to-transparent" />
 
@@ -98,7 +98,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Documents — categories & counts only */}
+      {/* Documents - categories & counts only */}
       <section id="documents" className="scroll-mt-24 bg-grid">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
           <Reveal>
@@ -108,7 +108,7 @@ export default function Home() {
                 Everything you need to <span className="text-muted-foreground">hire and operate.</span>
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                {DOCUMENTS.length} documents across four areas — each automatically filled with your
+                {DOCUMENTS.length} documents across four areas, each automatically filled with your
                 company details and jurisdiction. Start the flow to preview them live.
               </p>
             </div>
@@ -142,7 +142,7 @@ export default function Home() {
                 Preview the kit <ArrowRight className="h-4 w-4" />
               </Link>
               <p className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
-                <Lock className="h-3.5 w-3.5" /> Previews unlock once you start — watermarked &amp; copy-protected.
+                <Lock className="h-3.5 w-3.5" /> Previews unlock once you start. Watermarked and copy-protected.
               </p>
             </div>
           </Reveal>
@@ -180,7 +180,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Hyroo — reasons + social proof */}
+      {/* Why Hyroo - reasons + social proof */}
       <section className="bg-grid">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 md:py-28 lg:grid-cols-2 lg:items-center">
           <Reveal>
@@ -213,7 +213,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pricing — dark CTA island in both themes */}
+      {/* Pricing - dark CTA island in both themes */}
       <section id="pricing" className="scroll-mt-24 bg-grid">
         <div className="mx-auto max-w-md px-4 py-20 sm:px-6 md:py-28">
           <Reveal>
@@ -240,7 +240,7 @@ export default function Home() {
                   Build my kit <ArrowRight className="h-4 w-4" />
                 </Link>
                 <p className="mt-3 text-center text-xs text-white/50">
-                  Templates for informational use — not a substitute for legal advice.
+                  Templates for informational use, not a substitute for legal advice.
                 </p>
               </div>
             </div>

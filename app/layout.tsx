@@ -8,9 +8,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Hyroo — HR & legal paperwork for Indian startups, at ₹499",
+  title: "Hyroo | HR & legal paperwork for Indian startups, at ₹499",
   description:
-    "Answer a few questions about your company and instantly get a full kit of editable HR and legal documents — offer letters, NDAs, POSH policy, founders' agreement and more. Built for Indian startups.",
+    "Answer a few questions about your company and instantly get a full kit of editable HR and legal documents: offer letters, employment agreements, NDAs, the POSH policy and more. Built for Indian startups.",
 };
 
 const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('theme')||'dark';var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var e=document.documentElement;e.classList.toggle('dark',d);e.style.colorScheme=d?'dark':'light';}catch(_){document.documentElement.classList.add('dark');}})();`;

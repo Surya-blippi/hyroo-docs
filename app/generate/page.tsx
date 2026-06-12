@@ -16,7 +16,7 @@ import {
 } from "@/lib/types";
 import { DOCUMENTS, documentsByCategory, CATEGORY_ORDER, getDocument } from "@/lib/documents";
 import { downloadOne, downloadBundle } from "@/lib/render/bundle";
-import { verifyDodoPayment, loadPendingCompany, clearPendingCompany } from "@/lib/payment";
+import { verifyDodoPayment, sendKitEmail, loadPendingCompany, clearPendingCompany } from "@/lib/payment";
 
 type Step = 1 | 2 | 3;
 
@@ -46,6 +46,15 @@ export default function GeneratePage() {
   const [touched, setTouched] = useState(false);
   const [verifying, setVerifying] = useState(false);
   const [payError, setPayError] = useState<string | null>(null);
+  const [emailStatus, setEmailStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
+
+  // Generate the kit server-side and email it to the buyer (non-blocking).
+  async function emailKit(c: CompanyData, paymentId?: string) {
+    if (!c.email) return;
+    setEmailStatus("sending");
+    const ok = await sendKitEmail(c, paymentId);
+    setEmailStatus(ok ? "sent" : "failed");
+  }
 
   // Handle the return from Dodo's hosted checkout: verify + restore + unlock.
   useEffect(() => {
@@ -67,6 +76,7 @@ export default function GeneratePage() {
       if (ok) {
         clearPendingCompany();
         setPaid(true);
+        if (restored) void emailKit(restored, paymentId || undefined);
       } else {
         setPayError("We couldn't confirm your payment. If you were charged, contact support and we'll sort it out.");
       }
@@ -74,6 +84,7 @@ export default function GeneratePage() {
       setVerifying(false);
       window.history.replaceState({}, "", "/generate");
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const byCat = documentsByCategory();
@@ -156,7 +167,7 @@ export default function GeneratePage() {
             <p className="mt-1.5 text-ink-soft">
               {DOCUMENTS.length} documents, each filled with{" "}
               {company.brandName || company.legalName || "your company"}&apos;s details. Swipe
-              through a few — the full, editable files unlock after checkout.
+              through a few. The full, editable files unlock after checkout.
             </p>
 
             <div className="mt-6">
@@ -188,6 +199,7 @@ export default function GeneratePage() {
             company={company}
             byCat={byCat}
             paid={paid}
+            emailStatus={emailStatus}
             onPay={() => setShowPay(true)}
             onBack={() => setStep(2)}
             onDownloadAll={handleDownloadAll}
@@ -201,7 +213,7 @@ export default function GeneratePage() {
       <PaymentModal
         open={showPay}
         onClose={() => setShowPay(false)}
-        onSuccess={() => { setPaid(true); setShowPay(false); }}
+        onSuccess={() => { setPaid(true); setShowPay(false); void emailKit(company); }}
         name={company.signatoryName}
         email={company.email}
         company={company}
@@ -333,7 +345,7 @@ function CompanyStep({
       <p className="eyebrow">Step 1</p>
       <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink">Tell us about your company</h1>
       <p className="mt-1.5 text-ink-soft">
-        We use these details to fill every document. Optional fields can be left blank — they&apos;ll
+        We use these details to fill every document. Optional fields can be left blank. They&apos;ll
         appear as editable brackets you can complete later.
       </p>
 
@@ -374,7 +386,7 @@ function CompanyStep({
           <Field label="Phone" value={company.phone} onChange={(v) => update("phone", v)} placeholder="+91 98765 43210" />
         </div>
 
-        <h3 className="mb-4 mt-7 eyebrow">Optional — company logo</h3>
+        <h3 className="mb-4 mt-7 eyebrow">Optional: company logo</h3>
         <p className="-mt-2 mb-4 text-xs text-ink-muted">
           Upload a PNG or JPEG logo and it&apos;s printed on the letterhead of every generated document.
         </p>
@@ -417,7 +429,7 @@ function CompanyStep({
           </div>
         </div>
 
-        <h3 className="mb-4 mt-7 eyebrow">Optional — pre-fill HR letters</h3>
+        <h3 className="mb-4 mt-7 eyebrow">Optional: pre-fill HR letters</h3>
         <p className="-mt-2 mb-4 text-xs text-ink-muted">
           Fill these to pre-populate the offer / appointment / internship letters for one person.
           Leave blank to keep them as editable placeholders.
@@ -442,11 +454,12 @@ function CompanyStep({
 }
 
 function CheckoutStep({
-  company, byCat, paid, onPay, onBack, onDownloadAll, onDownloadOne, downloadingAll, busyId,
+  company, byCat, paid, emailStatus, onPay, onBack, onDownloadAll, onDownloadOne, downloadingAll, busyId,
 }: {
   company: CompanyData;
   byCat: ReturnType<typeof documentsByCategory>;
   paid: boolean;
+  emailStatus: "idle" | "sending" | "sent" | "failed";
   onPay: () => void;
   onBack: () => void;
   onDownloadAll: () => void;
@@ -460,8 +473,13 @@ function CheckoutStep({
         <div className="mb-6 flex items-center gap-3 rounded-2xl border border-brand-500/30 bg-brand-500/10 p-4">
           <CheckCircle2 className="h-6 w-6 shrink-0 text-brand-400" />
           <div>
-            <p className="font-semibold text-foreground">Payment successful — your kit is unlocked</p>
-            <p className="text-sm text-muted-foreground">Download everything below as editable Word files.</p>
+            <p className="font-semibold text-foreground">Payment successful. Your kit is unlocked</p>
+            <p className="text-sm text-muted-foreground">
+              Download everything below as editable Word files.
+              {emailStatus === "sending" && " We're also emailing the kit to " + (company.email || "you") + "…"}
+              {emailStatus === "sent" && " A copy has also been emailed to " + (company.email || "you") + "."}
+              {emailStatus === "failed" && " We couldn't email the kit; your downloads below are unaffected."}
+            </p>
           </div>
         </div>
 
@@ -509,7 +527,7 @@ function CheckoutStep({
       <p className="eyebrow">Step 3</p>
       <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink">Unlock your kit</h1>
       <p className="mt-1.5 text-ink-soft">
-        The complete kit for {company.brandName || company.legalName || "your company"} —
+        The complete kit for {company.brandName || company.legalName || "your company"},
         filled, formatted and ready to edit.
       </p>
 
@@ -549,7 +567,7 @@ function CheckoutStep({
         </button>
         <p className="inline-flex max-w-[60%] items-start gap-1.5 text-right text-xs text-ink-muted">
           <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-          Templates for informational use — not a substitute for legal advice.
+          Templates for informational use, not a substitute for legal advice.
         </p>
       </div>
     </section>
