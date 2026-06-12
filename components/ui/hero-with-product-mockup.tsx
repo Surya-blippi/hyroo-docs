@@ -34,13 +34,13 @@ export function HeroSection({
   eyebrow = "Built for first-time Indian founders",
   title = (
     <>
-      HR &amp; legal paperwork,{" "}
+      Every paperwork you need to {" "}
       <span className="bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent">
-        done right.
+        start your business.
       </span>
     </>
   ),
-  description = "Answer a few questions about your company. Hyroo generates a complete kit of editable, India-ready documents: offer letters, NDAs, the POSH policy and more. One flat price of ₹499.",
+  description = "Are you starting a new business? Hyroo helps you get started by taking the irrelevant things off your plate. It generates a complete kit of editable, India-ready documents like offer letters, NDAs, the POSH policy and more. One flat price of ₹499.",
   primaryButtonText = "Build my kit · ₹499",
   primaryButtonIcon = <ArrowRight size={20} />,
   primaryHref = "/generate",
