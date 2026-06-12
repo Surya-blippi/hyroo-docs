@@ -120,7 +120,8 @@ export async function POST(req: NextRequest) {
   }
 
   const resend = new Resend(apiKey);
-  const from = process.env.RESEND_FROM || "Hyroo <onboarding@resend.dev>";
+  // hyroo.in is verified in Resend, so default to the domain sender.
+  const from = process.env.RESEND_FROM || "Hyroo <kit@hyroo.in>";
   const companyName = company.brandName || company.legalName || "your company";
 
   const { error } = await resend.emails.send({
