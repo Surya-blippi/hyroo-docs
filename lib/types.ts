@@ -103,10 +103,12 @@ export function emptyCompany(): CompanyData {
 export type Block =
   | { type: "h1"; text: string }
   | { type: "h2"; text: string }
+  | { type: "h3"; text: string } // sub-heading inside a section
   | { type: "p"; text: string }
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
   | { type: "kv"; rows: [string, string][] } // label / value table
+  | { type: "table"; headers: string[]; rows: string[][] } // multi-column table
   | { type: "hr" }
   | { type: "sign"; left: string[]; right: string[] }
   | { type: "note"; text: string }; // small grey footnote / disclaimer

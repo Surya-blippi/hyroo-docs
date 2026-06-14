@@ -27,6 +27,23 @@ const block = (e: React.SyntheticEvent) => {
   return false;
 };
 
+// Colour fill-in placeholders ([brackets], <angles>, ___ blanks) purple.
+const PH_SPLIT = /(\[[^\]\n]*\]|<[^>\n]+>|_{3,})/g;
+const PH_TEST = /^(\[[^\]\n]*\]|<[^>\n]+>|_{3,})$/;
+function withPlaceholders(text: string): React.ReactNode {
+  const parts = text.split(PH_SPLIT).filter((p) => p !== "");
+  if (parts.length <= 1) return text;
+  return parts.map((part, i) =>
+    PH_TEST.test(part) ? (
+      <span key={i} className="font-medium text-violet-600">
+        {part}
+      </span>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
+}
+
 export function DocumentPreview({
   blocks,
   watermark = "Hyroo",
@@ -74,14 +91,16 @@ function BlockView({ block }: { block: Block }) {
         </h1>
       );
     case "h2":
-      return <h2 className="mb-2 mt-6 text-base font-bold text-ink">{block.text}</h2>;
+      return <h2 className="mb-2 mt-6 text-base font-bold text-zinc-900">{block.text}</h2>;
+    case "h3":
+      return <h3 className="mb-1 mt-4 text-sm font-bold text-zinc-900">{block.text}</h3>;
     case "p":
-      return <p className="mb-3 whitespace-pre-line text-justify">{block.text}</p>;
+      return <p className="mb-3 whitespace-pre-line text-justify">{withPlaceholders(block.text)}</p>;
     case "ul":
       return (
         <ul className="mb-3 ml-5 list-disc space-y-1">
           {block.items.map((it, i) => (
-            <li key={i}>{it}</li>
+            <li key={i}>{withPlaceholders(it)}</li>
           ))}
         </ul>
       );
@@ -89,7 +108,7 @@ function BlockView({ block }: { block: Block }) {
       return (
         <ol className="mb-3 ml-5 list-decimal space-y-1">
           {block.items.map((it, i) => (
-            <li key={i}>{it}</li>
+            <li key={i}>{withPlaceholders(it)}</li>
           ))}
         </ol>
       );
@@ -102,7 +121,32 @@ function BlockView({ block }: { block: Block }) {
                 <th className="w-2/5 border border-slate-200 bg-slate-50 px-3 py-2 text-left align-top font-semibold">
                   {k}
                 </th>
-                <td className="border border-slate-200 px-3 py-2 align-top">{v}</td>
+                <td className="border border-slate-200 px-3 py-2 align-top">{withPlaceholders(v)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    case "table":
+      return (
+        <table className="mb-4 w-full border-collapse text-[13px]">
+          <thead>
+            <tr>
+              {block.headers.map((h, i) => (
+                <th key={i} className="border border-slate-200 bg-slate-50 px-2.5 py-1.5 text-left align-top font-semibold">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {block.rows.map((r, i) => (
+              <tr key={i}>
+                {r.map((cell, j) => (
+                  <td key={j} className="border border-slate-200 px-2.5 py-1.5 align-top">
+                    {withPlaceholders(cell)}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>

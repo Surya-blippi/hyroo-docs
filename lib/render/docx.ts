@@ -20,6 +20,46 @@ const GREY = "6B7280"; // secondary (header/footer/notes)
 const RULE = "D9D9D9"; // light hairline divider
 const TABLE_BORDER = "BFBFBF"; // table gridlines
 const TABLE_HEAD = "F2F2F2"; // label column shading
+const PURPLE = "7C3AED"; // placeholders the user must fill in
+
+// Anything the user must replace: [brackets], <angles>, or ___ blanks.
+const PH_RE = /(\[[^\]\n]*\]|<[^>\n]+>|_{3,})/g;
+
+// Build TextRuns from a string, colouring fill-in placeholders purple and
+// preserving explicit line breaks.
+function inkRuns(
+  text: string,
+  opts: { bold?: boolean; italics?: boolean; size?: number; color?: string } = {}
+): TextRun[] {
+  const base = opts.color ?? INK;
+  const size = opts.size ?? 22;
+  const runs: TextRun[] = [];
+  text.split("\n").forEach((line, li) => {
+    const segs: { t: string; ph: boolean }[] = [];
+    let last = 0;
+    PH_RE.lastIndex = 0;
+    let m: RegExpExecArray | null;
+    while ((m = PH_RE.exec(line))) {
+      if (m.index > last) segs.push({ t: line.slice(last, m.index), ph: false });
+      segs.push({ t: m[0], ph: true });
+      last = m.index + m[0].length;
+    }
+    if (last < line.length || segs.length === 0) segs.push({ t: line.slice(last), ph: false });
+    segs.forEach((s, si) => {
+      runs.push(
+        new TextRun({
+          text: s.t,
+          bold: opts.bold,
+          italics: opts.italics,
+          color: s.ph ? PURPLE : base,
+          size,
+          break: li > 0 && si === 0 ? 1 : undefined,
+        })
+      );
+    });
+  });
+  return runs;
+}
 
 const BODY_FONT = "Calibri";
 const HEAD_FONT = "Calibri";
@@ -87,11 +127,58 @@ function kvTable(rows: [string, string][]): Table {
             new TableCell({
               width: { size: KV_COLS[1], type: WidthType.DXA },
               margins: cellMargins,
-              children: [para(v, { size: 21 })],
+              children: [new Paragraph({ children: inkRuns(v, { size: 21 }), spacing: { after: 0, line: 276 } })],
             }),
           ],
         })
     ),
+  });
+}
+
+// Multi-column table (e.g. salary structure / F&F computation annexures).
+function multiTable(headers: string[], rows: string[][]): Table {
+  const border = { style: BorderStyle.SINGLE, size: 2, color: TABLE_BORDER };
+  const cols = headers.length || (rows[0]?.length ?? 1);
+  const colW = Math.floor(CONTENT_WIDTH / cols);
+  const widths = Array.from({ length: cols }, () => colW);
+  const margins = { top: 70, bottom: 70, left: 120, right: 120 };
+
+  const headerRow = new TableRow({
+    tableHeader: true,
+    children: headers.map(
+      (h, i) =>
+        new TableCell({
+          width: { size: widths[i], type: WidthType.DXA },
+          shading: { fill: TABLE_HEAD },
+          margins,
+          children: [new Paragraph({ children: [new TextRun({ text: h, bold: true, size: 20, color: INK })], spacing: { after: 0, line: 264 } })],
+        })
+    ),
+  });
+
+  const bodyRows = rows.map(
+    (r) =>
+      new TableRow({
+        children: r.map(
+          (cell, i) =>
+            new TableCell({
+              width: { size: widths[i], type: WidthType.DXA },
+              margins,
+              children: [new Paragraph({ children: inkRuns(cell, { size: 20 }), spacing: { after: 0, line: 264 } })],
+            })
+        ),
+      })
+  );
+
+  return new Table({
+    width: { size: CONTENT_WIDTH, type: WidthType.DXA },
+    layout: TableLayoutType.FIXED,
+    columnWidths: widths,
+    borders: {
+      top: border, bottom: border, left: border, right: border,
+      insideHorizontal: border, insideVertical: border,
+    },
+    rows: headers.length ? [headerRow, ...bodyRows] : bodyRows,
   });
 }
 
@@ -148,13 +235,27 @@ function blockToDocx(block: Block): (Paragraph | Table)[] {
           keepNext: true,
         }),
       ];
+    case "h3":
+      return [
+        new Paragraph({
+          children: [new TextRun({ text: block.text, bold: true, color: INK, size: 22, font: HEAD_FONT })],
+          spacing: { after: 60, before: 160 },
+          keepNext: true,
+        }),
+      ];
     case "p":
-      return [para(block.text, { align: AlignmentType.JUSTIFIED })];
+      return [
+        new Paragraph({
+          children: inkRuns(block.text),
+          alignment: AlignmentType.JUSTIFIED,
+          spacing: { after: 160, line: 276 },
+        }),
+      ];
     case "ul":
       return block.items.map(
         (it) =>
           new Paragraph({
-            children: [new TextRun({ text: it, size: 22, color: INK })],
+            children: inkRuns(it),
             bullet: { level: 0 },
             spacing: { after: 90, line: 276 },
             alignment: AlignmentType.JUSTIFIED,
@@ -164,7 +265,7 @@ function blockToDocx(block: Block): (Paragraph | Table)[] {
       return block.items.map(
         (it) =>
           new Paragraph({
-            children: [new TextRun({ text: it, size: 22, color: INK })],
+            children: inkRuns(it),
             numbering: { reference: "ordered-list", level: 0 },
             spacing: { after: 90, line: 276 },
             alignment: AlignmentType.JUSTIFIED,
@@ -172,6 +273,8 @@ function blockToDocx(block: Block): (Paragraph | Table)[] {
       );
     case "kv":
       return [kvTable(block.rows), para(" ", { spacingAfter: 80 })];
+    case "table":
+      return [multiTable(block.headers, block.rows), para(" ", { spacingAfter: 80 })];
     case "hr":
       return [
         new Paragraph({

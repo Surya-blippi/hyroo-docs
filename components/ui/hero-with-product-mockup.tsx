@@ -34,8 +34,9 @@ export function HeroSection({
   eyebrow = "Built for first-time Indian founders",
   title = (
     <>
-      Every paperwork you need to {" "}
-      <span className="bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent">
+      Every paperwork you need to{" "}
+      <span className="bg-gradient-to-b from-foreground via-foreground to-foreground/40 bg-clip-text text-transparent">
+
         start your business.
       </span>
     </>

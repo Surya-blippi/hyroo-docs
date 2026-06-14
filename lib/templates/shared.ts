@@ -30,18 +30,19 @@ export function todayLong(): string {
   });
 }
 
-export function governingLaw(c: CompanyData): Block[] {
-  const state = c.state || "Karnataka";
+export function governingLaw(c: CompanyData, n?: number): Block[] {
+  const state = c.state || "[State]";
   const seat = c.city || "[City]";
+  const heading = n ? `${n}. Governing Law & Dispute Resolution` : "Governing Law & Dispute Resolution";
   return [
-    { type: "h2", text: "Governing Law & Jurisdiction" },
+    { type: "h2", text: heading },
     {
       type: "p",
-      text: `This document shall be governed by and construed in accordance with the laws of India. The courts at ${seat}, ${state} shall have exclusive jurisdiction over any dispute arising out of or in connection with this document, subject to the dispute-resolution provisions below.`,
+      text: `This document shall be governed by and construed in accordance with the laws of India. Subject to the dispute-resolution provisions below, the courts at ${seat}, ${state} shall have exclusive jurisdiction over any dispute arising out of or in connection with this document.`,
     },
     {
       type: "p",
-      text: `Any dispute, controversy or claim arising out of or relating to this document shall, as far as possible, be settled amicably. Failing amicable settlement within thirty (30) days, the dispute shall be referred to arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be ${seat}, ${state}, and the proceedings shall be conducted in English.`,
+      text: `Any dispute, controversy or claim arising out of or relating to this document shall, as far as possible, be settled amicably. Failing amicable settlement within thirty (30) days, the dispute shall be referred to and finally resolved by arbitration by a sole arbitrator under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be ${seat}, ${state}, and the proceedings shall be conducted in English.`,
     },
   ];
 }
