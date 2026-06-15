@@ -80,8 +80,7 @@ function emailHtml(c: CompanyData): string {
         <tr>
           <td style="padding:20px 32px;background:#fafafa;border-top:1px solid #e4e4e7;">
             <p style="margin:0;font-size:11px;line-height:1.6;color:#a1a1aa;">
-              These documents are customisable templates for general informational use and are not legal advice.
-              Hyroo is not a law firm. © ${new Date().getFullYear()} Hyroo.
+              © ${new Date().getFullYear()} Hyroo.
             </p>
           </td>
         </tr>
