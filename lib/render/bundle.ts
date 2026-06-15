@@ -2,7 +2,6 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import { CompanyData, DocumentDef } from "../types";
 import { buildDocxBlob, slugFilename } from "./docx";
-import { DISCLAIMER } from "../templates/shared";
 
 export async function downloadOne(def: DocumentDef, company: CompanyData) {
   const blob = await buildDocxBlob(def, company);
@@ -39,11 +38,7 @@ function readme(defs: DocumentDef[], c: CompanyData): string {
     "HOW TO USE",
     "  1. Open each document in Microsoft Word, Google Docs or any editor.",
     "  2. Replace anything in [square brackets] with your specific details.",
-    "  3. Have key contracts reviewed by an advocate and execute on appropriate",
-    "     stamp paper / e-stamp before relying on them.",
-    "",
-    "DISCLAIMER",
-    "  " + DISCLAIMER,
+    "  3. Execute on appropriate stamp paper / e-stamp where required.",
     "",
     "Made with Hyroo, HR & legal paperwork for Indian startups.",
   ];

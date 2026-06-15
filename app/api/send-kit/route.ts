@@ -69,7 +69,7 @@ function emailHtml(c: CompanyData): string {
             <ol style="margin:0 0 20px;padding-left:18px;font-size:14px;line-height:1.7;color:#52525b;">
               <li>Open any document in Microsoft Word or Google Docs.</li>
               <li>Replace anything in [square brackets] with your specific details.</li>
-              <li>Have key contracts reviewed by an advocate and execute on appropriate stamp paper before relying on them.</li>
+              <li>Execute on appropriate stamp paper / e-stamp where required.</li>
             </ol>
             <p style="margin:0;font-size:14px;line-height:1.6;color:#52525b;">
               Questions or need help? Reach us on
