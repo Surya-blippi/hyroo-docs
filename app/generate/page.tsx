@@ -17,6 +17,7 @@ import {
 import { DOCUMENTS, documentsByCategory, CATEGORY_ORDER, getDocument } from "@/lib/documents";
 import { downloadOne, downloadBundle } from "@/lib/render/bundle";
 import { verifyDodoPayment, sendKitEmail, loadPendingCompany, clearPendingCompany } from "@/lib/payment";
+import { fbqTrack, KIT_CONTENT } from "@/lib/fbq";
 
 type Step = 1 | 2 | 3;
 
@@ -76,6 +77,8 @@ export default function GeneratePage() {
       if (ok) {
         clearPendingCompany();
         setPaid(true);
+        // Purchase fires only after the payment is verified on return — never on a click.
+        fbqTrack("Purchase", KIT_CONTENT);
         if (restored) void emailKit(restored, paymentId || undefined);
       } else {
         setPayError("We couldn't confirm your payment. If you were charged, contact support and we'll sort it out.");
@@ -200,7 +203,7 @@ export default function GeneratePage() {
             byCat={byCat}
             paid={paid}
             emailStatus={emailStatus}
-            onPay={() => setShowPay(true)}
+            onPay={() => { fbqTrack("InitiateCheckout", KIT_CONTENT); setShowPay(true); }}
             onBack={() => setStep(2)}
             onDownloadAll={handleDownloadAll}
             onDownloadOne={handleDownloadOne}

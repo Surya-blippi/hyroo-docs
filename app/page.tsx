@@ -9,6 +9,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { TweetEmbed } from "@/components/TweetEmbed";
 import { WhatsAppFab, WhatsAppLink, WHATSAPP_DISPLAY } from "@/components/WhatsApp";
 import { ProductWalkthrough } from "@/components/ProductWalkthrough";
+import { TrackViewContent } from "@/components/TrackViewContent";
 import { HeroSection } from "@/components/ui/hero-with-product-mockup";
 import { DOCUMENTS, documentsByCategory, CATEGORY_ORDER } from "@/lib/documents";
 import { DocCategory } from "@/lib/types";
@@ -55,6 +56,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background">
+      <TrackViewContent />
       {/* Floating pill nav */}
       <div className="fixed inset-x-0 top-5 z-50 flex justify-center px-4">
         <nav className="flex items-center gap-4 rounded-full border border-border bg-background/70 px-5 py-2.5 shadow-2xl backdrop-blur-md sm:gap-6 sm:px-6">
