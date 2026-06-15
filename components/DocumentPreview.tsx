@@ -30,6 +30,12 @@ const block = (e: React.SyntheticEvent) => {
 // Colour fill-in placeholders ([brackets], <angles>, ___ blanks) purple.
 const PH_SPLIT = /(\[[^\]\n]*\]|<[^>\n]+>|_{3,})/g;
 const PH_TEST = /^(\[[^\]\n]*\]|<[^>\n]+>|_{3,})$/;
+// Capitalise the first letter of a list item so bullets/numbers are uniform.
+function capFirst(s: string): string {
+  const i = s.search(/[A-Za-z]/);
+  return i < 0 ? s : s.slice(0, i) + s[i].toUpperCase() + s.slice(i + 1);
+}
+
 function withPlaceholders(text: string): React.ReactNode {
   const parts = text.split(PH_SPLIT).filter((p) => p !== "");
   if (parts.length <= 1) return text;
@@ -98,17 +104,17 @@ function BlockView({ block }: { block: Block }) {
       return <p className="mb-3 whitespace-pre-line text-justify">{withPlaceholders(block.text)}</p>;
     case "ul":
       return (
-        <ul className="mb-3 ml-5 list-disc space-y-1">
+        <ul className="mb-3 ml-5 list-disc space-y-1.5">
           {block.items.map((it, i) => (
-            <li key={i}>{withPlaceholders(it)}</li>
+            <li key={i}>{withPlaceholders(capFirst(it))}</li>
           ))}
         </ul>
       );
     case "ol":
       return (
-        <ol className="mb-3 ml-5 list-decimal space-y-1">
+        <ol className="mb-3 ml-5 list-decimal space-y-1.5">
           {block.items.map((it, i) => (
-            <li key={i}>{withPlaceholders(it)}</li>
+            <li key={i}>{withPlaceholders(capFirst(it))}</li>
           ))}
         </ol>
       );

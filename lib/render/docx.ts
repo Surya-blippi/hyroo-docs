@@ -182,6 +182,13 @@ function multiTable(headers: string[], rows: string[][]): Table {
   });
 }
 
+// Capitalise the first letter of a list item so bullets/numbers are uniform,
+// regardless of how the source string is cased.
+function capFirst(s: string): string {
+  const i = s.search(/[A-Za-z]/);
+  return i < 0 ? s : s.slice(0, i) + s[i].toUpperCase() + s.slice(i + 1);
+}
+
 const NO_BORDER = { style: BorderStyle.NONE, size: 0, color: "FFFFFF" };
 
 function signTable(left: string[], right: string[]): Table {
@@ -255,20 +262,19 @@ function blockToDocx(block: Block): (Paragraph | Table)[] {
       return block.items.map(
         (it) =>
           new Paragraph({
-            children: inkRuns(it),
+            children: inkRuns(capFirst(it)),
             bullet: { level: 0 },
-            spacing: { after: 90, line: 276 },
-            alignment: AlignmentType.JUSTIFIED,
+            spacing: { after: 100, line: 276 },
+            indent: { left: 460, hanging: 260 },
           })
       );
     case "ol":
       return block.items.map(
         (it) =>
           new Paragraph({
-            children: inkRuns(it),
+            children: inkRuns(capFirst(it)),
             numbering: { reference: "ordered-list", level: 0 },
-            spacing: { after: 90, line: 276 },
-            alignment: AlignmentType.JUSTIFIED,
+            spacing: { after: 100, line: 276 },
           })
       );
     case "kv":
