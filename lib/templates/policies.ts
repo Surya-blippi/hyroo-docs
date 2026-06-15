@@ -1,5 +1,5 @@
 import { CompanyData, DocumentDef, Block } from "../types";
-import { displayName, shortName, todayLong, disclaimer } from "./shared";
+import { displayName, shortName, todayLong } from "./shared";
 
 function isLargeTeam(c: CompanyData): boolean {
   return c.headcount !== "1-9";
@@ -162,7 +162,6 @@ export const poshPolicy: DocumentDef = {
         type: "p",
         text: "The Company may review and amend this Policy from time to time to ensure continued compliance with the Act and to reflect best practice. The latest version supersedes all earlier versions and will be communicated to employees.",
       },
-      disclaimer(),
     ];
   },
 };
@@ -237,7 +236,6 @@ export const leavePolicy: DocumentDef = {
       type: "p",
       text: "The Company may review and amend this Policy from time to time. The latest version supersedes all earlier versions and will be communicated to employees.",
     },
-    disclaimer(),
   ],
 };
 
@@ -399,7 +397,6 @@ export const codeOfConduct: DocumentDef = {
       ],
       right: [],
     },
-    disclaimer(),
   ],
 };
 
@@ -541,6 +538,5 @@ export const performanceReviewPolicy: DocumentDef = {
       type: "p",
       text: "The Company may review and amend this Policy from time to time to reflect business needs and legal requirements. The latest version supersedes all earlier versions and will be communicated to employees.",
     },
-    disclaimer(),
   ],
 };

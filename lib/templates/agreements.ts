@@ -1,7 +1,7 @@
 import { CompanyData, DocumentDef, Block } from "../types";
 import {
   displayName, shortName, regLine, todayLong, governingLaw,
-  disclaimer, signCompanyEmployee,
+  signCompanyEmployee,
 } from "./shared";
 import { industryConfidentialityNote, industryDataClause } from "./industry";
 
@@ -132,7 +132,6 @@ export const employeeNdaNonCompete: DocumentDef = {
         text: "The Employee confirms having read and understood this Agreement and agrees to be bound by its terms.",
       },
       signCompanyEmployee(c, "Employee"),
-      disclaimer(),
     ];
   },
 };
@@ -241,7 +240,6 @@ export const companyNda: DocumentDef = {
       text: "The Parties have caused this Agreement to be executed by their duly authorised representatives as of the Effective Date.",
     },
     twoPartySign(c, "the Counterparty"),
-    disclaimer(),
   ],
 };
 
@@ -308,7 +306,6 @@ export const consultantAgreement: DocumentDef = {
 
     { type: "h2", text: "Execution" },
     twoPartySign(c, "the Consultant"),
-    disclaimer(),
   ],
 };
 
@@ -381,6 +378,5 @@ export const vendorAgreement: DocumentDef = {
 
     { type: "h2", text: "Execution" },
     twoPartySign(c, "the Vendor"),
-    disclaimer(),
   ],
 };

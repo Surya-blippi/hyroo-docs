@@ -1,7 +1,7 @@
 import { CompanyData, DocumentDef, Block } from "../types";
 import {
   displayName, shortName, fullAddress, todayLong, governingLaw,
-  disclaimer, signCompanyEmployee,
+  signCompanyEmployee,
 } from "./shared";
 import { industryDataClause } from "./industry";
 
@@ -54,7 +54,6 @@ export const offerLetter: DocumentDef = {
     },
     { type: "p", text: "We look forward to welcoming you aboard." },
     signCompanyEmployee(c, "Candidate"),
-    disclaimer(),
   ],
 };
 
@@ -271,7 +270,6 @@ export const employmentAgreement: DocumentDef = {
           "Date: __________________",
         ],
       },
-      disclaimer()
     );
     return blocks;
   },
@@ -325,7 +323,6 @@ export const probationConfirmation: DocumentDef = {
         "Date: __________________",
       ],
     },
-    disclaimer(),
   ],
 };
 
@@ -444,6 +441,5 @@ export const separationAgreement: DocumentDef = {
         ["Net Amount Payable", "[__________]"],
       ],
     },
-    disclaimer(),
   ],
 };
