@@ -2,6 +2,9 @@ import {
   ArrowRight, Check, CreditCard, Download, FileText, Lock, Mail,
 } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
+import { DOCUMENTS } from "@/lib/documents";
+
+const DOC_COUNT = DOCUMENTS.length;
 
 // Visual product walkthrough: enter details → locked preview → pay → delivery.
 // Each step renders a miniature mockup of the real screen.
@@ -60,7 +63,7 @@ function PayMini() {
       <div className="flex items-end justify-between rounded-lg border border-border bg-card px-3 py-2">
         <div>
           <p className="text-[10px] font-medium text-primary">Founder starter kit</p>
-          <p className="text-[10px] text-muted-foreground">12 editable documents</p>
+          <p className="text-[10px] text-muted-foreground">{DOC_COUNT} editable documents</p>
         </div>
         <p className="text-lg font-bold text-foreground">₹499</p>
       </div>
@@ -80,7 +83,7 @@ function DeliveryMini() {
           <FileText className="h-4 w-4 shrink-0 text-primary" />
           <div className="min-w-0">
             <p className="truncate text-[11px] font-semibold text-foreground">acme-document-kit.zip</p>
-            <p className="text-[10px] text-muted-foreground">12 Word files, ready to edit</p>
+            <p className="text-[10px] text-muted-foreground">{DOC_COUNT} Word files, ready to edit</p>
           </div>
         </div>
         <Download className="h-4 w-4 shrink-0 text-muted-foreground" />

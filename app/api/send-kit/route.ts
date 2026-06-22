@@ -5,7 +5,7 @@ import { DOCUMENTS } from "@/lib/documents";
 import { buildDocxBlob, slugFilename } from "@/lib/render/docx";
 import { WHATSAPP_DISPLAY, WHATSAPP_HREF } from "@/lib/support";
 
-// Generates all 12 documents server-side and emails them as attachments.
+// Generates all kit documents server-side and emails them as attachments.
 // Called by the client after a successful payment. When Dodo is configured,
 // the payment is re-verified here so the endpoint can't be abused.
 

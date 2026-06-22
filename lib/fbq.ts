@@ -6,7 +6,7 @@ declare global {
 }
 
 export const KIT_CONTENT = {
-  content_name: "Hyroo 12 Document Kit",
+  content_name: "Hyroo Document Kit",
   value: 499,
   currency: "INR",
 };

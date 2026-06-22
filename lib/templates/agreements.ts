@@ -309,6 +309,164 @@ export const consultantAgreement: DocumentDef = {
   ],
 };
 
+export const marketingConsultantAgreement: DocumentDef = {
+  id: "marketing-consultant-agreement",
+  name: "Marketing Consultant Agreement",
+  category: "Company Legal Contracts",
+  description:
+    "Engages a marketing consultant to streamline and execute marketing activities: scope, fees, confidentiality, the right to feature the consultant in promotional material, and a roles annexure.",
+  build: (c): Block[] => [
+    { type: "h1", text: "Marketing Consultant Agreement" },
+    { type: "p", text: `Date: ${todayLong()}` },
+    {
+      type: "p",
+      text: `This Consultant Agreement (this "Agreement") is entered into on the date set forth on the signature page by and between:`,
+    },
+    { type: "p", text: regLine(c) },
+    {
+      type: "p",
+      text: `AND [Consultant Name], [PAN: __________], residing at [Address] (the "Consultant"). The Company and the Consultant are referred to individually as a "Party" and collectively as the "Parties". The Parties agree as follows.`,
+    },
+
+    { type: "h2", text: "1. Services" },
+    {
+      type: "p",
+      text: `The Consultant agrees to act as a marketing consultant to the Company and to provide advice and assistance for streamlining and executing the marketing activities of the Company (collectively, the "Services"). The detailed roles and responsibilities of the Consultant are set out in Annexure I.`,
+    },
+
+    { type: "h2", text: "2. Term" },
+    {
+      type: "p",
+      text: "This Agreement shall commence on [Start Date] and continue until [End Date], unless terminated earlier in accordance with this Agreement. The term may be extended by mutual written agreement of the Parties before the end of the engagement period.",
+    },
+
+    { type: "h2", text: "3. Compensation & Taxes" },
+    {
+      type: "p",
+      text: "In consideration of the Services, the Company shall pay the Consultant ₹[______] (Rupees [______] only) per month, plus applicable taxes. The compensation shall be subject to deduction of TDS as per the Income-tax Rules, and the Company shall issue the relevant TDS certificate. The Consultant shall be responsible for GST compliance where applicable.",
+    },
+
+    { type: "h2", text: "4. Reimbursement of Expenses" },
+    {
+      type: "p",
+      text: "Any relevant field or business travel undertaken by the Consultant at the Company's request shall be claimed and reimbursed separately, in accordance with the Company's expense policy and against valid supporting documents.",
+    },
+
+    { type: "h2", text: "5. Roles & Responsibilities" },
+    {
+      type: "p",
+      text: "The Consultant shall perform the roles and responsibilities laid down in Annexure I with due skill, care and diligence, in a professional manner, and within the timelines reasonably agreed with the Company.",
+    },
+
+    { type: "h2", text: "6. Term & Termination" },
+    {
+      type: "p",
+      text: "This Agreement shall continue until terminated by either Party for any reason upon fifteen (15) days' prior written notice, without further obligation or liability except as accrued up to the date of termination. On termination:",
+    },
+    {
+      type: "ul",
+      items: [
+        "the Company shall pay the Consultant the compensation due for all working days up to the date of termination; and",
+        "the Consultant shall promptly hand over all Company work-related materials, documents and property in their possession.",
+      ],
+    },
+
+    { type: "h2", text: "7. Independent Contractor" },
+    {
+      type: "p",
+      text: "The Consultant's relationship with the Company is that of an independent contractor and not that of an employee. The Consultant will not be eligible for any employee benefits. The Company may make deductions such as TDS and any other deductions mandated by law from payments made to the Consultant, and the relevant TDS certificate will be issued. The Consultant has no authority to enter into contracts that bind the Company, or to create obligations on the part of the Company, without the prior written authorisation of the Company.",
+    },
+
+    { type: "h2", text: "8. Non-Disclosure of Confidential Information" },
+    { type: "h3", text: "8.1 Agreement Not to Disclose" },
+    {
+      type: "p",
+      text: "The Consultant agrees not to use any Confidential Information (as defined below) disclosed to the Consultant by the Company for the Consultant's own use or for any purpose other than to carry out discussions concerning, and the undertaking of, the Services. The Consultant agrees to take all reasonable measures to protect the secrecy of, and avoid disclosure or use of, the Company's Confidential Information in order to prevent it from falling into the public domain or the possession of persons other than agents of the Company or persons to whom the Company consents to such disclosure. Upon request by the Company, any materials or documents furnished by the Company to the Consultant in connection with the Services shall be promptly returned by the Consultant to the Company.",
+    },
+    { type: "h3", text: "8.2 Survival" },
+    {
+      type: "p",
+      text: "The obligations of non-disclosure of Confidential Information shall continue to be in effect even after the termination of this Agreement.",
+    },
+    { type: "h3", text: "8.3 Definition of Confidential Information" },
+    {
+      type: "p",
+      text: '"Confidential Information" means any information, technical data or know-how (whether disclosed before or after the date of this Agreement), including, but not limited to, information relating to business and product or service plans, financial projections, customer lists, business forecasts, sales and merchandising, human resources, patents, patent applications, computer object or source code, research, inventions, processes, designs, drawings, engineering, marketing or finance, that is confidential or proprietary or which would, under the circumstances, appear to a reasonable person to be confidential or proprietary. Confidential Information does not include information, technical data or know-how that: (i) is in the possession of the Consultant at the time of disclosure, as shown by the Consultant\'s files and records immediately prior to the time of disclosure; or (ii) becomes part of public knowledge or literature, not as a direct or indirect result of any improper inaction or action of the Consultant. Notwithstanding the foregoing, the Consultant may disclose Confidential Information with the prior written approval of the Company, or pursuant to the order or requirement of a court, administrative agency or other governmental body.',
+    },
+
+    { type: "h2", text: "9. No Rights Granted" },
+    {
+      type: "p",
+      text: "Nothing in this Agreement shall be construed as granting any rights under any patent, copyright or other intellectual property right of the Company, nor shall this Agreement grant the Consultant any rights in or to the Company's Confidential Information, except the limited right to use the Confidential Information in connection with the Services.",
+    },
+
+    { type: "h2", text: "10. Company's Right to Disclose" },
+    {
+      type: "p",
+      text: "The Company shall have the right to disclose the existence of this Agreement and the Consultant's status as a consultant, and to include the Consultant's name, image and profile in various promotional materials, including, but not limited to, executive summaries and the Company's website. In connection therewith:",
+    },
+    {
+      type: "ul",
+      items: [
+        "the Consultant shall provide a profile image and profile brief which the Company may use for any necessary communication; and",
+        "if there is any change to either the image or profile that the Consultant requires for official communication purposes, the Consultant shall intimate the Company to update the same.",
+      ],
+    },
+
+    { type: "h2", text: "11. Miscellaneous" },
+    {
+      type: "p",
+      text: "Any term of this Agreement may be amended or waived only with the written consent of the Parties. So long as the Consultant continues to serve as a consultant to the Company, the Consultant consents to the Company including the Consultant's name on its marketing materials, website, private placement memorandum or offering materials as a consultant of the Company. This Agreement, including any schedules and annexures hereto, constitutes the sole agreement of the Parties and supersedes all oral negotiations and prior writings with respect to its subject matter. This Agreement may be executed in counterparts, including by electronic signature, each of which shall be deemed an original, but all of which together shall constitute one and the same instrument.",
+    },
+
+    ...governingLaw(c, 12),
+
+    { type: "h2", text: "Execution" },
+    {
+      type: "p",
+      text: "IN WITNESS WHEREOF, the Parties have caused this Agreement to be executed by their duly authorised representatives as of the date first set forth above.",
+    },
+    {
+      type: "sign",
+      left: [
+        `For and on behalf of ${shortName(c)}`,
+        "",
+        "_______________________",
+        c.signatoryName || "[Authorised Signatory]",
+        c.signatoryDesignation || "[Designation]",
+        `Date: ${todayLong()}`,
+      ],
+      right: [
+        "The Consultant",
+        "",
+        "_______________________",
+        "Name: __________________",
+        "PAN: ___________________",
+        "Address: ________________",
+      ],
+    },
+
+    { type: "hr" },
+    { type: "h2", text: "Annexure I — Roles & Responsibilities" },
+    {
+      type: "p",
+      text: "The Consultant shall be responsible for streamlining and executing the Company's marketing activities, including the following (to be tailored to the engagement):",
+    },
+    {
+      type: "ul",
+      items: [
+        "Developing and refining the Company's overall marketing strategy and positioning;",
+        "Planning and executing digital marketing campaigns across relevant channels (social media, search, email and content);",
+        "Managing brand communication, messaging and creative direction for consistency across channels;",
+        "Overseeing content creation, scheduling and the marketing calendar;",
+        "Tracking, analysing and reporting key marketing metrics, and recommending improvements;",
+        "Coordinating with internal teams and external agencies or vendors as required; and",
+        "Any other marketing activities reasonably requested by the Company within the scope of the Services.",
+      ],
+    },
+  ],
+};
+
 export const vendorAgreement: DocumentDef = {
   id: "vendor-agreement",
   name: "Vendor / Service Provider Agreement",

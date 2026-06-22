@@ -5,6 +5,7 @@ import {
 import { poshPolicy, leavePolicy, codeOfConduct, performanceReviewPolicy } from "./templates/policies";
 import {
   employeeNdaNonCompete, companyNda, consultantAgreement, vendorAgreement,
+  marketingConsultantAgreement,
 } from "./templates/agreements";
 
 export const DOCUMENTS: DocumentDef[] = [
@@ -21,6 +22,7 @@ export const DOCUMENTS: DocumentDef[] = [
   // Company Legal Contracts
   companyNda,
   consultantAgreement,
+  marketingConsultantAgreement,
   vendorAgreement,
   // Compliance & Governance
   poshPolicy,
